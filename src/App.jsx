@@ -1,7 +1,13 @@
-import React from 'react';
+import { Header, Footer } from './components/layout';
 
 const App = () => {
-  return <div>App</div>;
+  return (
+    <div>
+      <Header />
+      contents
+      <Footer />
+    </div>
+  );
 };
 
 export default App;
