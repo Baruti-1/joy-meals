@@ -1,12 +1,14 @@
+import { NavLink, Link } from 'react-router-dom';
 import logo from '../../assets/images/mango.png';
 
 const Header = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
       <div className="container-fluid">
-        <a className="navbar-brand" href="/">
+        <Link className="navbar-brand" to="/">
           <img src={logo} alt="logo" className="logo" />
-        </a>
+          <span className="heading">Joy Meals</span>
+        </Link>
         <button
           className="navbar-toggler"
           type="button"
@@ -20,31 +22,36 @@ const Header = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/shoppingCart">
+                <i className="bi bi-cart"></i>
+              </NavLink>
+            </li>
             <li className="nav-item dropdown">
-              <a
+              <NavLink
                 className="nav-link dropdown-toggle"
-                href="#"
+                to="#"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
                 Admin Panel
-              </a>
+              </NavLink>
               <ul className="dropdown-menu">
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <NavLink className="dropdown-item" to="#">
                     Action
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <NavLink className="dropdown-item" to="#">
                     Another action
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a className="dropdown-item" href="#">
+                  <NavLink className="dropdown-item" to="#">
                     Something else here
-                  </a>
+                  </NavLink>
                 </li>
               </ul>
             </li>

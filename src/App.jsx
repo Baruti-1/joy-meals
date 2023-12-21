@@ -1,11 +1,18 @@
+import { Routes, Route } from 'react-router-dom';
 import { Header, Footer } from './components/layout';
-import { Home } from './pages';
+import { Home, NotFound } from './pages';
 
 const App = () => {
   return (
     <div>
       <Header />
-      <Home />
+      <div className="pb-5">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </div>
+
       <Footer />
     </div>
   );
