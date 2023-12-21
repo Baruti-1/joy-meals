@@ -1,6 +1,12 @@
 .logo {
   height: 40px;
 }
+
 .heading {
   margin-left: 10px;
+}
+
+.menuLink {
+  text-decoration: none;
+  color: green;
 }

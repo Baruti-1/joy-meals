@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const MenuItemCard = ({ menuItem }) => {
   return (
@@ -9,12 +10,14 @@ const MenuItemCard = ({ menuItem }) => {
       >
         <div className="card-body pt-2">
           <div className="row col-10 offset-1 p-4">
-            <img
-              src={menuItem.image}
-              style={{ borderRadius: '50%' }}
-              alt=""
-              className="w-100 mt-5 image-box"
-            />
+            <Link to={`/menuItemDetails/${menuItem.id}`}>
+              <img
+                src={menuItem.image}
+                style={{ borderRadius: '50%' }}
+                alt=""
+                className="w-100 mt-5 image-box"
+              />
+            </Link>
           </div>
 
           {menuItem.specialTag && menuItem.specialTag && (
@@ -48,7 +51,11 @@ const MenuItemCard = ({ menuItem }) => {
           ></i>
 
           <div className="text-center">
-            <p className="card-title m-0 text-success fs-3">{menuItem.name}</p>
+            <p className="card-title m-0 text-success fs-3">
+              <Link to={`/menuItemDetails/${menuItem.id}`} className="menuLink">
+                {menuItem.name}
+              </Link>
+            </p>
             <p className="badge bg-secondary" style={{ fontSize: '12px' }}>
               {menuItem.category}
             </p>
