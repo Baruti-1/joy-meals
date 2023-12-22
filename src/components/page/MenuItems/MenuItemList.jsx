@@ -15,7 +15,11 @@ const MenuItemList = () => {
   }, [isLoading]);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="d-flex justify-content-center" style={{ width: '100%' }}>
+        <div>Loading...</div>
+      </div>
+    );
   }
 
   return (
