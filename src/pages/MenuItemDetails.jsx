@@ -1,20 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 const MenuItemDetails = () => {
   const { menuItemId } = useParams();
+  const [menuItemDetails, setMenuItemDetails] = useState({});
+
+  useEffect(() => {
+    fetch(`https://redmangoapi.azurewebsites.net/api/MenuItem/${menuItemId}`)
+      .then((res) => res.json())
+      .then((data) => setMenuItemDetails(data.result));
+  }, []);
 
   return (
     <div className="container pt-4 pt-md-5">
       <div className="row">
         <div className="col-7">
-          <h2 className="text-success">NAME</h2>
+          <h2 className="text-success">{menuItemDetails.name}</h2>
           <span>
             <span
               className="badge text-bg-dark pt-2"
               style={{ height: '40px', fontSize: '20px' }}
             >
-              CATEGORY
+              {menuItemDetails.category}
             </span>
           </span>
           <span>
@@ -22,11 +29,11 @@ const MenuItemDetails = () => {
               className="badge text-bg-light pt-2"
               style={{ height: '40px', fontSize: '20px' }}
             >
-              SPECIAL TAG
+              {menuItemDetails.specialTag && menuItemDetails.specialTag}
             </span>
           </span>
           <p style={{ fontSize: '20px' }} className="pt-2">
-            DESCRIPTION
+            {menuItemDetails.description}
           </p>
           <span className="h3">$10</span> &nbsp;&nbsp;&nbsp;
           <span
@@ -61,7 +68,7 @@ const MenuItemDetails = () => {
         </div>
         <div className="col-5">
           <img
-            src="https://via.placeholder.com/150"
+            src={menuItemDetails.image}
             width="100%"
             style={{ borderRadius: '50%' }}
             alt="No content"
