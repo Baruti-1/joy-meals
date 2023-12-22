@@ -8,6 +8,8 @@ const MenuItemDetails = () => {
   const { data, isLoading } = useGetMenuItemByIdQuery(menuItemId);
   const navigate = useNavigate();
 
+  //const userId = 1e04f782-5283-4020-a71f-da8da39ae415
+
   const handleQuantity = (counter) => {
     let newQuantity = quantity + counter;
     if (newQuantity === 0) {
