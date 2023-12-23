@@ -11,7 +11,7 @@ const shoppingCartApi = createApi({
       query: (userId) => ({
         url: `shoppingcart`,
         params: {
-          userid,
+          userId,
         },
       }),
       providesTags: ['ShoppingCarts'],
@@ -20,6 +20,7 @@ const shoppingCartApi = createApi({
       query: ({ menuItemId, updateQuantityBy, userId }) => ({
         url: 'shoppingcart',
         method: 'POST',
+        //mode: 'no-cors',
         params: {
           menuItemId,
           updateQuantityBy,
