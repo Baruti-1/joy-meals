@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { MainLoader } from '../components/page/common';
 import { useGetMenuItemByIdQuery } from '../apis/menuItemApi';
 import { useUpdateShoppingCartMutation } from '../apis/shoppingCartApi';
 
@@ -108,7 +109,7 @@ const MenuItemDetails = () => {
           className="d-flex justify-content-center"
           style={{ width: '100%' }}
         >
-          <div>Loading...</div>
+          <MainLoader />
         </div>
       )}
     </div>
