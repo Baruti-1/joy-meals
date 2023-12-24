@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { MainLoader } from '../components/page/common';
+import { MinLoader, MainLoader } from '../components/page/common';
 import { useGetMenuItemByIdQuery } from '../apis/menuItemApi';
 import { useUpdateShoppingCartMutation } from '../apis/shoppingCartApi';
 
@@ -77,12 +77,18 @@ const MenuItemDetails = () => {
             </span>
             <div className="row pt-4">
               <div className="col-5">
-                <button
-                  className="btn btn-success form-control"
-                  onClick={() => handleAddToCart(data.result.id)}
-                >
-                  Add to Cart
-                </button>
+                {isAddingToCart ? (
+                  <button disabled className="btn btn-success form-control">
+                    <MinLoader />
+                  </button>
+                ) : (
+                  <button
+                    className="btn btn-success form-control"
+                    onClick={() => handleAddToCart(data.result.id)}
+                  >
+                    Add to Cart
+                  </button>
+                )}
               </div>
 
               <div className="col-5 ">

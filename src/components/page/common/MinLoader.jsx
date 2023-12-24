@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MinLoader = ({ type = 'warning', size = 100 }) => {
+const MinLoader = ({ type = 'warning', size = '100%' }) => {
   return (
     <div
       style={{ scale: `${size}%` }}
