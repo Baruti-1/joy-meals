@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import MenuItemCard from './MenuItemCard';
 import { useGetMenuItemsQuery } from '../../../apis/menuItemApi';
 import { useDispatch } from 'react-redux';
