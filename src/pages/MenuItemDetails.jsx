@@ -12,7 +12,8 @@ const MenuItemDetails = () => {
   const navigate = useNavigate();
   const [updateShoppingCart] = useUpdateShoppingCartMutation();
 
-  //const userId = 1e04f782-5283-4020-a71f-da8da39ae415
+  // const customer = '89ffdadf-b999-4911-a48c-b956ccfa0c9c';
+  // const admin = '1e04f782-5283-4020-a71f-da8da39ae415';
 
   const handleQuantity = (counter) => {
     let newQuantity = quantity + counter;
@@ -27,9 +28,8 @@ const MenuItemDetails = () => {
     const res = await updateShoppingCart({
       menuItemId: menuItemId,
       updateQuantityBy: quantity,
-      userId: '1e04f782-5283-4020-a71f-da8da39ae415',
+      userId: '89ffdadf-b999-4911-a48c-b956ccfa0c9c',
     });
-    console.log(res);
     setIsAddingToCart(false);
   };
 

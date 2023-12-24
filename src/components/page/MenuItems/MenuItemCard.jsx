@@ -12,7 +12,7 @@ const MenuItemCard = ({ menuItem }) => {
     const res = await updateShoppingCart({
       menuItemId: menuItemId,
       updateQuantityBy: 1,
-      userId: '1e04f782-5283-4020-a71f-da8da39ae415',
+      userId: '89ffdadf-b999-4911-a48c-b956ccfa0c9c',
     });
     setIsAddingToCart(false);
   };
