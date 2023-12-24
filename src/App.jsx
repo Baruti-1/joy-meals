@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import { Header, Footer } from './components/layout';
-import { Home, MenuItemDetails, NotFound } from './pages';
+import { Home, MenuItemDetails, ShoppingCart, NotFound } from './pages';
 import { useGetShoppingCartQuery } from './apis/shoppingCartApi';
 import { setShoppingCart } from './store/redux/shoppingCartSlice';
 
@@ -26,6 +26,7 @@ const App = () => {
             path="/menuItemDetails/:menuItemId"
             element={<MenuItemDetails />}
           />
+          <Route path="/shoppingCart" element={<ShoppingCart />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
