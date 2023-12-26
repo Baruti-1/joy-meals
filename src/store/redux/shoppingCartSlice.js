@@ -12,16 +12,16 @@ export const shoppingCartSlice = createSlice({
       state.cartItems = action.payload;
     },
     updateQuantity: (state, action) => {
-      state.cartItems = state.cartItems.map((items) => {
-        if (items.id === action.payload.cartItem.id) {
-          items.quantity = action.payload.quantity;
+      state.cartItems = state.cartItems.map((item) => {
+        if (item.id === action.payload.cartItem.id) {
+          item.quantity = action.payload.quantity;
         }
         return item;
       });
     },
     removeFromCart: (state, action) => {
-      state.cartItems = state.cartItems.filter((items) => {
-        if (items.id === action.payload.cartItem.id) {
+      state.cartItems = state.cartItems.filter((item) => {
+        if (item.id === action.payload.cartItem.id) {
           return null;
         }
         return item;
@@ -30,5 +30,6 @@ export const shoppingCartSlice = createSlice({
   },
 });
 
-export const { setShoppingCart } = shoppingCartSlice.actions;
+export const { setShoppingCart, updateQuantity, removeFromCart } =
+  shoppingCartSlice.actions;
 export const shoppingCartReducer = shoppingCartSlice.reducer;

@@ -9,7 +9,7 @@ import { setShoppingCart } from './store/redux/shoppingCartSlice';
 const App = () => {
   const dispatch = useDispatch();
   const { isLoading, data } = useGetShoppingCartQuery(
-    '89ffdadf-b999-4911-a48c-b956ccfa0c9c'
+    '1e04f782-5283-4020-a71f-da8da39ae415'
   );
 
   useEffect(() => {
