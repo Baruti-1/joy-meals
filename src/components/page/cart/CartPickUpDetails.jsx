@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { inputHelper } from '../../../helper';
+import MinLoader from '../common/MinLoader';
 
 const CartPickUpDetails = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const shoppingCartFromStore = useSelector(
     (state) => state.shoppingCartStore.cartItems ?? []
   );
@@ -9,11 +12,29 @@ const CartPickUpDetails = () => {
   let grandTotal = 0;
   let totalItems = 0;
 
+  const initialUserData = {
+    name: '',
+    email: '',
+    phoneNumber: '',
+  };
+
   shoppingCartFromStore.map((cartItem) => {
     totalItems += cartItem.quantity ?? 0;
     grandTotal += (cartItem.menuItem.price ?? 0) * (cartItem.quantity ?? 0);
     return null;
   });
+
+  const [userInput, setUserInput] = useState(initialUserData);
+
+  const handleUserInput = (e) => {
+    const tempData = inputHelper(e, userInput);
+    setUserInput(tempData);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+  };
 
   return (
     <div className="border pb-5 pt-3">
@@ -21,13 +42,15 @@ const CartPickUpDetails = () => {
         Pickup Details
       </h1>
       <hr />
-      <form className="col-10 mx-auto">
+      <form onSubmit={handleSubmit} className="col-10 mx-auto">
         <div className="form-group mt-3">
           Pickup Name
           <input
             type="text"
             className="form-control"
             placeholder="name..."
+            value={userInput.name}
+            onChange={handleUserInput}
             name="name"
             required
           />
@@ -38,6 +61,8 @@ const CartPickUpDetails = () => {
             type="email"
             className="form-control"
             placeholder="email..."
+            value={userInput.email}
+            onChange={handleUserInput}
             name="email"
             required
           />
@@ -50,6 +75,8 @@ const CartPickUpDetails = () => {
             className="form-control"
             placeholder="phone number..."
             name="phoneNumber"
+            value={userInput.phoneNumber}
+            onChange={handleUserInput}
             required
           />
         </div>
@@ -60,10 +87,11 @@ const CartPickUpDetails = () => {
           </div>
         </div>
         <button
+          disabled={isLoading}
           type="submit"
           className="btn btn-lg btn-success form-control mt-3"
         >
-          Looks Good? Place Order!
+          {isLoading ? <MinLoader /> : 'Looks Good? Place Order!'}
         </button>
       </form>
     </div>
