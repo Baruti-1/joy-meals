@@ -1,7 +1,12 @@
 import { NavLink, Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import logo from '../../assets/images/mango.png';
 
 const Header = () => {
+  const shoppingCartFromStore = useSelector(
+    (state) => state.shoppingCartStore.cartItems ?? []
+  );
+
   return (
     <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
       <div className="container-fluid">
@@ -24,7 +29,10 @@ const Header = () => {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <NavLink className="nav-link" to="/shoppingCart">
-                <i className="bi bi-cart"></i>
+                <i className="bi bi-cart"></i>{' '}
+                {shoppingCartFromStore.length
+                  ? `(${shoppingCartFromStore.length})`
+                  : ''}
               </NavLink>
             </li>
             <li className="nav-item dropdown">
