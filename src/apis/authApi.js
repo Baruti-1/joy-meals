@@ -10,12 +10,11 @@ const authApi = createApi({
       query: (userData) => ({
         url: 'auth/register',
         method: 'POST',
+        // mode: 'no-cors',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-type': 'application/json',
         },
-        body: {
-          userData,
-        },
+        body: userData,
       }),
     }),
     loginUser: builder.mutation({
@@ -25,9 +24,7 @@ const authApi = createApi({
         headers: {
           'Content-Type': 'application/json',
         },
-        body: {
-          userCredentials,
-        },
+        body: userCredentials,
       }),
     }),
   }),

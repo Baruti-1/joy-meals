@@ -9,7 +9,7 @@ const initialState = {
 
 export const userAuthSlice = createSlice({
   name: 'userAuth',
-  initialState,
+  initialState: initialState,
   reducers: {
     setLoggedInUser: (state, action) => {
       state.fullName = action.payload.fullName;
