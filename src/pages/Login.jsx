@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
-import inputHelper from '../helper/inputHelper';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { jwtDecode } from 'jwt-decode';
 import { useLoginUserMutation } from '../apis/authApi';
+import { setLoggedInUser } from '../store/redux/userAuthSlice';
+import MinLoader from '../components/page/common/MinLoader';
+import inputHelper from '../helper/inputHelper';
 
 const Login = () => {
   const [error, setError] = useState('');
@@ -9,7 +14,9 @@ const Login = () => {
     userName: '',
     password: '',
   });
+  const navigate = useNavigate();
   const [loginUser] = useLoginUserMutation();
+  const dispatch = useDispatch();
 
   const handleUserInput = (e) => {
     const tempData = inputHelper(e, userInput);
@@ -25,7 +32,11 @@ const Login = () => {
     });
 
     if (response.data) {
-      localStorage.setItem('token', response.data.result.token);
+      const { token } = response.data.result;
+      const { id, fullName, email, role } = jwtDecode(token);
+      localStorage.setItem('token', token);
+      dispatch(setLoggedInUser({ id, fullName, email, role }));
+      navigate('/');
     } else if (response.error) {
       console.log(response.error.data.errorMessages[0]);
       setError(response.error.data.errorMessages[0]);
@@ -71,7 +82,7 @@ const Login = () => {
             className="btn btn-success"
             style={{ width: '200px' }}
           >
-            Login
+            {loading ? <MinLoader /> : 'Login'}
           </button>
         </div>
       </form>
