@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import inputHelper from '../helper/inputHelper';
 import { useRegisterUserMutation } from '../apis/authApi';
+import toastNotify from '../helper/toastNotify';
+import { MinLoader } from '../components/page/common';
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
@@ -10,6 +13,7 @@ const Register = () => {
     password: '',
     role: '',
   });
+  const navigate = useNavigate();
   const [registerUser] = useRegisterUserMutation();
 
   const handleUserInput = (e) => {
@@ -28,9 +32,10 @@ const Register = () => {
     });
 
     if (response.data) {
-      console.log(response.data);
+      toastNotify('Registration successful, please login to continue');
+      navigate('/login');
     } else if (response.error) {
-      console.log(response.error.data.errorMessages[0]);
+      toastNotify(response.error.data.errorMessages[0], 'error');
     }
 
     setLoading(false);
@@ -75,8 +80,9 @@ const Register = () => {
             />
           </div>
         </div>
+        {loading && <MinLoader />}
         <div className="mt-5">
-          <button type="submit" className="btn btn-success">
+          <button type="submit" className="btn btn-success" disabled={loading}>
             Register
           </button>
         </div>

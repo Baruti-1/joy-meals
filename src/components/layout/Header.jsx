@@ -50,34 +50,36 @@ const Header = () => {
                   : ''}
               </NavLink>
             </li>
-            <li className="nav-item dropdown">
-              <NavLink
-                className="nav-link dropdown-toggle"
-                to="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Admin Panel
-              </NavLink>
-              <ul className="dropdown-menu">
-                <li>
-                  <NavLink className="dropdown-item" to="#">
-                    Action
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink className="dropdown-item" to="#">
-                    Another action
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink className="dropdown-item" to="#">
-                    Something else here
-                  </NavLink>
-                </li>
-              </ul>
-            </li>
+            {userData.role === 'admin' && (
+              <li className="nav-item dropdown">
+                <NavLink
+                  className="nav-link dropdown-toggle"
+                  to="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Admin Panel
+                </NavLink>
+                <ul className="dropdown-menu">
+                  <li>
+                    <NavLink className="dropdown-item" to="#">
+                      Action
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink className="dropdown-item" to="#">
+                      Another action
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink className="dropdown-item" to="#">
+                      Something else here
+                    </NavLink>
+                  </li>
+                </ul>
+              </li>
+            )}
             <div className="d-flex" style={{ marginLeft: 'auto' }}>
               {userData.id && (
                 <>

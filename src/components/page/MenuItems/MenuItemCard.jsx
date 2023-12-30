@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { MinLoader } from '../common';
 import { useUpdateShoppingCartMutation } from '../../../apis/shoppingCartApi';
+import toastNotify from '../../../helper/toastNotify';
 
 const MenuItemCard = ({ menuItem }) => {
   const [isAddingToCart, setIsAddingToCart] = useState(false);
@@ -14,6 +15,9 @@ const MenuItemCard = ({ menuItem }) => {
       updateQuantityBy: 1,
       userId: '1e04f782-5283-4020-a71f-da8da39ae415',
     });
+    if (res.data && res.data.isSuccess) {
+      toastNotify('Item added to cart successfully');
+    }
     setIsAddingToCart(false);
   };
 

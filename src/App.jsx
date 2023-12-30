@@ -12,12 +12,22 @@ import {
 } from './pages';
 import { useGetShoppingCartQuery } from './apis/shoppingCartApi';
 import { setShoppingCart } from './store/redux/shoppingCartSlice';
+import { setLoggedInUser } from './store/redux/userAuthSlice';
+import { jwtDecode } from 'jwt-decode';
 
 const App = () => {
   const dispatch = useDispatch();
   const { isLoading, data } = useGetShoppingCartQuery(
     '1e04f782-5283-4020-a71f-da8da39ae415'
   );
+
+  useEffect(() => {
+    const localToken = localStorage.getItem('token');
+    if (localToken) {
+      const { id, fullName, email, role } = jwtDecode(localToken);
+      dispatch(setLoggedInUser({ id, fullName, email, role }));
+    }
+  }, []);
 
   useEffect(() => {
     if (!isLoading) dispatch(setShoppingCart(data.result.cartItems));

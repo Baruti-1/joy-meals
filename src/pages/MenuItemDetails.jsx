@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { MinLoader, MainLoader } from '../components/page/common';
 import { useGetMenuItemByIdQuery } from '../apis/menuItemApi';
 import { useUpdateShoppingCartMutation } from '../apis/shoppingCartApi';
+import toastNotify from '../helper/toastNotify';
 
 const MenuItemDetails = () => {
   const [quantity, setQuantity] = useState(1);
@@ -30,6 +31,9 @@ const MenuItemDetails = () => {
       updateQuantityBy: quantity,
       userId: '1e04f782-5283-4020-a71f-da8da39ae415',
     });
+    if (res.data && res.data.isSuccess) {
+      toastNotify('Item added to cart successfully');
+    }
     setIsAddingToCart(false);
   };
 
