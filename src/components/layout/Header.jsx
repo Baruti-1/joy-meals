@@ -45,9 +45,7 @@ const Header = () => {
             <li className="nav-item">
               <NavLink className="nav-link" to="/shoppingCart">
                 <i className="bi bi-cart"></i>{' '}
-                {shoppingCartFromStore.length
-                  ? `(${shoppingCartFromStore.length})`
-                  : ''}
+                {userData.id && `(${shoppingCartFromStore.length})`}
               </NavLink>
             </li>
             {userData.role === 'admin' && (
