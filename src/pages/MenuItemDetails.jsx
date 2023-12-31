@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { MinLoader, MainLoader } from '../components/page/common';
 import { useGetMenuItemByIdQuery } from '../apis/menuItemApi';
 import { useUpdateShoppingCartMutation } from '../apis/shoppingCartApi';
@@ -12,6 +13,7 @@ const MenuItemDetails = () => {
   const { data, isLoading } = useGetMenuItemByIdQuery(menuItemId);
   const navigate = useNavigate();
   const [updateShoppingCart] = useUpdateShoppingCartMutation();
+  const userData = useSelector((state) => state.userAuthStore);
 
   // const customer = '89ffdadf-b999-4911-a48c-b956ccfa0c9c';
   // const admin = '1e04f782-5283-4020-a71f-da8da39ae415';
@@ -25,6 +27,10 @@ const MenuItemDetails = () => {
   };
 
   const handleAddToCart = async (menuItemId) => {
+    if (!userData.id) {
+      navigate('/login');
+      return;
+    }
     setIsAddingToCart(true);
     const res = await updateShoppingCart({
       menuItemId: menuItemId,

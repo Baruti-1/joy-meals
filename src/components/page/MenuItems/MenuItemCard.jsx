@@ -1,15 +1,23 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { MinLoader } from '../common';
 import { useUpdateShoppingCartMutation } from '../../../apis/shoppingCartApi';
 import toastNotify from '../../../helper/toastNotify';
 
 const MenuItemCard = ({ menuItem }) => {
   const [isAddingToCart, setIsAddingToCart] = useState(false);
+  const navigate = useNavigate();
   const [updateShoppingCart] = useUpdateShoppingCartMutation();
+  const userData = useSelector((state) => state.userAuthStore);
 
   const handleAddToCart = async (menuItemId) => {
+    if (!userData.id) {
+      navigate('/login');
+      return;
+    }
     setIsAddingToCart(true);
+
     const res = await updateShoppingCart({
       menuItemId: menuItemId,
       updateQuantityBy: 1,
@@ -18,6 +26,7 @@ const MenuItemCard = ({ menuItem }) => {
     if (res.data && res.data.isSuccess) {
       toastNotify('Item added to cart successfully');
     }
+
     setIsAddingToCart(false);
   };
 
