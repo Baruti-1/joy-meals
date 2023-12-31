@@ -8,14 +8,15 @@ import {
 
 const CartSummary = () => {
   const dispatch = useDispatch();
+  const userData = useSelector((state) => state.userAuthStore);
   const [updateShoppingCart] = useUpdateShoppingCartMutation();
 
   const shoppingCartFromStore = useSelector(
     (state) => state.shoppingCartStore.cartItems ?? []
   );
 
-  if (!shoppingCartFromStore) {
-    return <div>Empty Shopping Cart</div>;
+  if (shoppingCartFromStore.length === 0) {
+    return <div className="text-center mt-3">Empty Shopping Cart</div>;
   }
 
   const handleQuantity = (updateQuantityBy, cartItem) => {
@@ -26,7 +27,7 @@ const CartSummary = () => {
       updateShoppingCart({
         menuItemId: cartItem.menuItem.id,
         updateQuantityBy: 0,
-        userId: '1e04f782-5283-4020-a71f-da8da39ae415',
+        userId: userData.id,
       });
       // remove the item
       dispatch(removeFromCart({ cartItem, quantity: 0 }));
@@ -34,7 +35,7 @@ const CartSummary = () => {
       updateShoppingCart({
         menuItemId: cartItem.menuItem.id,
         updateQuantityBy: updateQuantityBy,
-        userId: '1e04f782-5283-4020-a71f-da8da39ae415',
+        userId: userData.id,
       });
       // update the quantity with the new quantity
       dispatch(

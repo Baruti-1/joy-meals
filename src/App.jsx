@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 import { Header, Footer } from './components/layout';
 import {
@@ -17,9 +17,8 @@ import { jwtDecode } from 'jwt-decode';
 
 const App = () => {
   const dispatch = useDispatch();
-  const { isLoading, data } = useGetShoppingCartQuery(
-    '1e04f782-5283-4020-a71f-da8da39ae415'
-  );
+  const userData = useSelector((state) => state.userAuthStore);
+  const { isLoading, data } = useGetShoppingCartQuery(userData.id);
 
   useEffect(() => {
     const localToken = localStorage.getItem('token');
@@ -30,7 +29,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    if (!isLoading) dispatch(setShoppingCart(data.result.cartItems));
+    if (!isLoading) dispatch(setShoppingCart(data.result?.cartItems));
   }, [data]);
 
   return (

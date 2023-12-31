@@ -11,7 +11,7 @@ const shoppingCartApi = createApi({
       query: (userId) => ({
         url: `shoppingcart`,
         params: {
-          userId,
+          userId: userId,
         },
       }),
       providesTags: ['ShoppingCarts'],

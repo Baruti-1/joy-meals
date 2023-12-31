@@ -16,8 +16,8 @@ const store = configureStore({
 
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
-      .concat(authApi.middleware)
       .concat(menuItemApi.middleware)
+      .concat(authApi.middleware)
       .concat(shoppingCartApi.middleware),
 });
 

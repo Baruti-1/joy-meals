@@ -35,7 +35,7 @@ const MenuItemDetails = () => {
     const res = await updateShoppingCart({
       menuItemId: menuItemId,
       updateQuantityBy: quantity,
-      userId: '1e04f782-5283-4020-a71f-da8da39ae415',
+      userId: userData.id,
     });
     if (res.data && res.data.isSuccess) {
       toastNotify('Item added to cart successfully');
