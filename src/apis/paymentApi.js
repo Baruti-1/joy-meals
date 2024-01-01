@@ -7,7 +7,7 @@ const paymentApi = createApi({
   }),
   endpoints: (builder) => ({
     initiatePayment: builder.mutation({
-      query: () => ({
+      query: (userId) => ({
         url: 'payment',
         method: 'POST',
         params: {

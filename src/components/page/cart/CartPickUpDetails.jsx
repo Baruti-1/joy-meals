@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { inputHelper } from '../../../helper';
 import MinLoader from '../common/MinLoader';
+import { useInitiatePaymentMutation } from '../../../apis/paymentApi';
 
 const CartPickUpDetails = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -9,6 +11,7 @@ const CartPickUpDetails = () => {
     (state) => state.shoppingCartStore.cartItems ?? []
   );
   const userData = useSelector((state) => state.userAuthStore);
+  const navigate = useNavigate();
 
   let grandTotal = 0;
   let totalItems = 0;
@@ -20,6 +23,7 @@ const CartPickUpDetails = () => {
   };
 
   const [userInput, setUserInput] = useState(initialUserData);
+  const [initiatePayment] = useInitiatePaymentMutation();
 
   shoppingCartFromStore.map((cartItem) => {
     totalItems += cartItem.quantity ?? 0;
@@ -35,6 +39,11 @@ const CartPickUpDetails = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+
+    const { data } = await initiatePayment(userData.id);
+    navigate('/payment', {
+      state: { apiResult: data?.result, userInput },
+    });
   };
 
   return (

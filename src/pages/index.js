@@ -4,5 +4,14 @@ import MenuItemDetails from './MenuItemDetails';
 import ShoppingCart from './ShoppingCart';
 import Register from './Register';
 import Login from './Login';
+import Payment from './Payment';
 
-export { Home, NotFound, MenuItemDetails, ShoppingCart, Register, Login };
+export {
+  Home,
+  NotFound,
+  MenuItemDetails,
+  ShoppingCart,
+  Register,
+  Login,
+  Payment,
+};
