@@ -8,23 +8,24 @@ const CartPickUpDetails = () => {
   const shoppingCartFromStore = useSelector(
     (state) => state.shoppingCartStore.cartItems ?? []
   );
+  const userData = useSelector((state) => state.userAuthStore);
 
   let grandTotal = 0;
   let totalItems = 0;
 
   const initialUserData = {
-    name: '',
-    email: '',
+    name: userData.fullName,
+    email: userData.email,
     phoneNumber: '',
   };
+
+  const [userInput, setUserInput] = useState(initialUserData);
 
   shoppingCartFromStore.map((cartItem) => {
     totalItems += cartItem.quantity ?? 0;
     grandTotal += (cartItem.menuItem.price ?? 0) * (cartItem.quantity ?? 0);
     return null;
   });
-
-  const [userInput, setUserInput] = useState(initialUserData);
 
   const handleUserInput = (e) => {
     const tempData = inputHelper(e, userInput);
