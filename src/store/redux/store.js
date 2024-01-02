@@ -1,7 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { menuItemReducer } from './menuItemSlice';
 import { shoppingCartReducer } from './shoppingCartSlice';
-import { authApi, menuItemApi, shoppingCartApi, paymentApi } from '../../apis';
+import {
+  authApi,
+  menuItemApi,
+  shoppingCartApi,
+  paymentApi,
+  orderApi,
+} from '../../apis';
 import { userAuthReducer } from './userAuthSlice';
 
 const store = configureStore({
@@ -13,6 +19,7 @@ const store = configureStore({
     [shoppingCartApi.reducerPath]: shoppingCartApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
     [paymentApi.reducerPath]: paymentApi.reducer,
+    [orderApi.reducerPath]: orderApi.reducer,
   },
 
   middleware: (getDefaultMiddleware) =>
@@ -20,6 +27,7 @@ const store = configureStore({
       .concat(menuItemApi.middleware)
       .concat(authApi.middleware)
       .concat(paymentApi.middleware)
+      .concat(orderApi.middleware)
       .concat(shoppingCartApi.middleware),
 });
 
