@@ -14,7 +14,7 @@ const OrderSummary = ({ data, userInput }) => {
           <div className="p-3">
             {data.cartItems.map((item) => {
               return (
-                <div className="d-flex">
+                <div className="d-flex" key={item.menuItem.id}>
                   <div className="d-flex w-100 justify-content-between">
                     <p>{item.menuItem?.name}</p>
                     <p>
