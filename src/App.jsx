@@ -10,6 +10,7 @@ import {
   Login,
   Payment,
   OrderConfirmed,
+  MyOrders,
   NotFound,
 } from './pages';
 import { useGetShoppingCartQuery } from './apis/shoppingCartApi';
@@ -52,6 +53,7 @@ const App = () => {
             path="/order/orderconfirmed/:id"
             element={<OrderConfirmed />}
           />
+          <Route path="/order/myorders" element={<MyOrders />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

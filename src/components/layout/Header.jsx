@@ -48,6 +48,11 @@ const Header = () => {
                 {userData.id && `(${shoppingCartFromStore.length})`}
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/order/myorders">
+                My Orders
+              </NavLink>
+            </li>
             {userData.role === 'admin' && (
               <li className="nav-item dropdown">
                 <NavLink
