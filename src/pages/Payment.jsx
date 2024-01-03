@@ -31,7 +31,7 @@ const Payment = () => {
           <div className="col-md-4 offset-md-1">
             <h4 className="text-success">Payment</h4>
             <div className="mt-5">
-              <PaymentForm />
+              <PaymentForm data={apiResult} userInput={userInput} />
             </div>
           </div>
         </div>
