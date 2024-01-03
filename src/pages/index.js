@@ -5,6 +5,7 @@ import ShoppingCart from './ShoppingCart';
 import Register from './Register';
 import Login from './Login';
 import Payment from './Payment';
+import OrderConfirmed from './order/OrderConfirmed';
 
 export {
   Home,
@@ -14,4 +15,5 @@ export {
   Register,
   Login,
   Payment,
+  OrderConfirmed,
 };

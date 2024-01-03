@@ -1,7 +1,10 @@
 import React from 'react';
-import confirmImg from '../../assets/confirmed.jpg';
+import { useParams } from 'react-router-dom';
+import confirmImg from '../../assets/images/confirmed.jpg';
 
 const OrderConfirmed = () => {
+  const { id } = useParams();
+
   return (
     <div className="w-100 text-center d-flex justify-content-center align-items-center">
       <div>
@@ -11,7 +14,7 @@ const OrderConfirmed = () => {
         ></i>
         <div className="pb-5">
           <h2 className=" text-success">Order has been Confirmed!</h2>
-          <h5 className="mt-3">Your order ID: XX</h5>
+          <h5 className="mt-3">Your order ID: {id}</h5>
           <p>We will soon start to cook the delicous food you ordered. </p>
           <img
             src={confirmImg}

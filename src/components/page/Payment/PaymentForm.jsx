@@ -72,7 +72,7 @@ const PaymentForm = ({ data, userInput }) => {
           result.paymentIntent.status === 'succeeded' ? 'confirmed' : 'pending',
       });
       if (response.data?.result.status === 'confirmed') {
-        navigate(`/order/orderConfirmed/${response.data.result.orderHeaderId}`);
+        navigate(`/order/orderconfirmed/${response.data.result.orderHeaderId}`);
       }
     }
     setIsProcessing(false);
@@ -81,7 +81,11 @@ const PaymentForm = ({ data, userInput }) => {
   return (
     <form onSubmit={handleSubmit}>
       <PaymentElement />
-      <button className="mt-5 w-100 btn btn-success">Submit</button>
+      <button className="mt-5 w-100 btn btn-success" disabled={!stripe}>
+        <span id="button-text">
+          {isProcessing ? 'Processing...' : 'Submit Order'}
+        </span>
+      </button>
     </form>
   );
 };
