@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   useStripe,
   useElements,
@@ -9,6 +10,7 @@ import toastNotify from '../../../helper/toastNotify';
 
 const PaymentForm = ({ data, userInput }) => {
   const [isProcessing, setIsProcessing] = useState(false);
+  const navigate = useNavigate();
   const stripe = useStripe();
   const elements = useElements();
   const [createOrder] = useCreateOrderMutation();
@@ -69,7 +71,11 @@ const PaymentForm = ({ data, userInput }) => {
         status:
           result.paymentIntent.status === 'succeeded' ? 'confirmed' : 'pending',
       });
+      if (response.data?.result.status === 'confirmed') {
+        navigate(`/order/orderConfirmed/${response.data.result.orderHeaderId}`);
+      }
     }
+    setIsProcessing(false);
   };
 
   return (
