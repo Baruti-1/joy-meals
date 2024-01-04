@@ -42,12 +42,7 @@ const Header = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 w-100">
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/order/myorders">
-                My Orders
-              </NavLink>
-            </li>
-            {userData.role === 'admin' && (
+            {userData.role === 'admin' ? (
               <li className="nav-item dropdown">
                 <NavLink
                   className="nav-link dropdown-toggle"
@@ -75,6 +70,12 @@ const Header = () => {
                     </NavLink>
                   </li>
                 </ul>
+              </li>
+            ) : (
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/order/myorders">
+                  My Orders
+                </NavLink>
               </li>
             )}
             <li className="nav-item">
