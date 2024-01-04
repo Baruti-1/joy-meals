@@ -43,12 +43,6 @@ const Header = () => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 w-100">
             <li className="nav-item">
-              <NavLink className="nav-link" to="/shoppingCart">
-                <i className="bi bi-cart"></i>{' '}
-                {userData.id && `(${shoppingCartFromStore.length})`}
-              </NavLink>
-            </li>
-            <li className="nav-item">
               <NavLink className="nav-link" to="/order/myorders">
                 My Orders
               </NavLink>
@@ -83,6 +77,12 @@ const Header = () => {
                 </ul>
               </li>
             )}
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/shoppingCart">
+                <i className="bi bi-cart"></i>{' '}
+                {userData.id && `(${shoppingCartFromStore.length})`}
+              </NavLink>
+            </li>
             <div className="d-flex" style={{ marginLeft: 'auto' }}>
               {userData.id && (
                 <>
