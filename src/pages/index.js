@@ -7,7 +7,8 @@ import Login from './Login';
 import Payment from './Payment';
 import OrderConfirmed from './order/OrderConfirmed';
 import MyOrders from './order/MyOrders';
-import OrderList from './order/OrderList';
+import OrderList from '../components/page/order/OrderList';
+import OrderDetails from './order/OrderDetails';
 
 export {
   Home,
@@ -20,4 +21,5 @@ export {
   OrderConfirmed,
   MyOrders,
   OrderList,
+  OrderDetails,
 };

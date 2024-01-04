@@ -3,7 +3,7 @@ import withAuth from '../../hoc/withAuth';
 import { useSelector } from 'react-redux';
 import { useGetAllOrdersQuery } from '../../apis/orderApi';
 import { MainLoader } from '../../components/page/common';
-import OrderList from './OrderList';
+import OrderList from '../../components/page/order/OrderList';
 
 const MyOrders = () => {
   const userId = useSelector((state) => state.userAuthStore.id);

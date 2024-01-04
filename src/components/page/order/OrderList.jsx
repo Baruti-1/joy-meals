@@ -1,6 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const OrderList = ({ data }) => {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="table p-5">
@@ -30,7 +33,16 @@ const OrderList = ({ data }) => {
                     {new Date(orderItem.orderDate).toLocaleDateString()}
                   </div>
                   <div className="col-2">
-                    <button className="btn btn-success">Details</button>
+                    <button
+                      className="btn btn-success"
+                      onClick={() =>
+                        navigate(
+                          `/order/orderdetails/${orderItem.orderHeaderId}`
+                        )
+                      }
+                    >
+                      Details
+                    </button>
                   </div>
                 </div>
               );
