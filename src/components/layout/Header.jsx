@@ -44,7 +44,7 @@ const Header = () => {
           <ul className="navbar-nav me-auto mb-2 mb-lg-0 w-100">
             {userData.role === 'admin' ? (
               <li className="nav-item dropdown">
-                <NavLink
+                <Link
                   className="nav-link dropdown-toggle"
                   to="#"
                   role="button"
@@ -52,22 +52,21 @@ const Header = () => {
                   aria-expanded="false"
                 >
                   Admin Panel
-                </NavLink>
+                </Link>
                 <ul className="dropdown-menu">
-                  <li>
-                    <NavLink className="dropdown-item" to="#">
-                      Action
-                    </NavLink>
+                  <li
+                    className="dropdown-item"
+                    onClick={() => navigate('/order/myorders')}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    My Orders
                   </li>
-                  <li>
-                    <NavLink className="dropdown-item" to="#">
-                      Another action
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink className="dropdown-item" to="#">
-                      Something else here
-                    </NavLink>
+                  <li
+                    className="dropdown-item"
+                    onClick={() => navigate('/order/allorders')}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    All Orders
                   </li>
                 </ul>
               </li>
