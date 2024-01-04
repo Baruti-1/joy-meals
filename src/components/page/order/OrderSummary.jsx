@@ -1,7 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getStatusColor } from '../../../helper';
 
 const OrderSummary = ({ data, userInput }) => {
+  const navigate = useNavigate();
   const badgeTypeColor = getStatusColor(data.status);
 
   return (
@@ -41,6 +43,11 @@ const OrderSummary = ({ data, userInput }) => {
             </h4>
           </div>
         </div>
+      </div>
+      <div className="d-flex justify-content-between align-items-center mt-3">
+        <button className="btn btn-secondary" onClick={() => navigate(-1)}>
+          Back to Orders
+        </button>
       </div>
     </div>
   );
