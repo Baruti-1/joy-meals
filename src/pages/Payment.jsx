@@ -14,8 +14,6 @@ const Payment = () => {
     state: { apiResult, userInput },
   } = useLocation();
 
-  console.log(apiResult);
-
   const options = {
     // passing the client secret obtained from the server
     clientSecret: apiResult.clientSecret,

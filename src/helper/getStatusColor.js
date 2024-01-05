@@ -5,11 +5,11 @@ const getStatusColor = (status) => {
     ? 'secondary'
     : status === 'Cancelled'
     ? 'danger'
-    : status === 'completed'
+    : status === 'Completed'
     ? 'success'
-    : status === 'being_cooked'
+    : status === 'Being Cooked'
     ? 'info'
-    : status === 'ready_for_pickup' && 'warning';
+    : status === 'Ready for Pickup' && 'warning';
 };
 
 export default getStatusColor;
