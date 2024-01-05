@@ -3,7 +3,7 @@ const getStatusColor = (status) => {
     ? 'primary'
     : status === 'pending'
     ? 'secondary'
-    : status === 'cancelled'
+    : status === 'Cancelled'
     ? 'danger'
     : status === 'completed'
     ? 'success'

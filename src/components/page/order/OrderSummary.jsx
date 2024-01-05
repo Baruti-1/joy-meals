@@ -1,10 +1,22 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { getStatusColor } from '../../../helper';
 
 const OrderSummary = ({ data, userInput }) => {
   const navigate = useNavigate();
+  const userData = useSelector((state) => state.userAuthStore);
   const badgeTypeColor = getStatusColor(data.status);
+
+  const nextStatus =
+    data.status === 'confirmed'
+      ? { color: 'info', value: 'Being Cooked' }
+      : data.status === 'being_cooked'
+      ? { color: 'warning', value: 'Ready for Pickup' }
+      : data.status === 'ready_for_pickup' && {
+          color: 'success',
+          value: 'Completed',
+        };
 
   return (
     <div>
@@ -48,6 +60,14 @@ const OrderSummary = ({ data, userInput }) => {
         <button className="btn btn-secondary" onClick={() => navigate(-1)}>
           Back to Orders
         </button>
+        {userData.role === 'admin' && (
+          <div className="d-flex">
+            <button className="btn btn-danger mx-2">Cancel</button>
+            <button className={`btn btn-${nextStatus.color}`}>
+              {nextStatus.value}
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
