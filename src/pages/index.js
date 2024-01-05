@@ -11,6 +11,7 @@ import OrderList from '../components/page/order/OrderList';
 import OrderDetails from './order/OrderDetails';
 import AllOrders from './order/AllOrders';
 import MenuItemList from './menuItem/MenuItemList';
+import MenuItemUpsert from './menuItem/MenuItemUpsert';
 
 export {
   Home,
@@ -26,4 +27,5 @@ export {
   OrderDetails,
   AllOrders,
   MenuItemList,
+  MenuItemUpsert,
 };

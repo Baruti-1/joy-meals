@@ -15,6 +15,7 @@ import {
   AllOrders,
   NotFound,
   MenuItemList,
+  MenuItemUpsert,
 } from './pages';
 import { useGetShoppingCartQuery } from './apis/shoppingCartApi';
 import { setShoppingCart } from './store/redux/shoppingCartSlice';
@@ -60,6 +61,10 @@ const App = () => {
           <Route path="/order/orderdetails/:id" element={<OrderDetails />} />
           <Route path="/order/allorders" element={<AllOrders />} />
           <Route path="/menuitem/menuitemlist" element={<MenuItemList />} />
+          <Route
+            path="/menuitem/menuitemupsert/:id"
+            element={<MenuItemUpsert />}
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

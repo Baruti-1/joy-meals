@@ -1,9 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useGetMenuItemsQuery } from '../../apis/menuItemApi';
 import { MainLoader } from '../../components/page/common';
-import { menuItemReducer } from '../../store/redux/menuItemSlice';
 
 const MenuItemList = () => {
+  const navigate = useNavigate();
   const { isLoading, data } = useGetMenuItemsQuery();
 
   return (
@@ -26,7 +27,6 @@ const MenuItemList = () => {
               <div className="col-1">Action</div>
             </div>
             {data.result.map((menuItem) => {
-              console.log(menuItem);
               return (
                 <div className="row border" key={menuItem.id}>
                   <div className="col-1">
@@ -42,7 +42,12 @@ const MenuItemList = () => {
                   <div className="col-1">{menuItem.price}</div>
                   <div className="col-2">{menuItem.specialTag}</div>
                   <div className="col-2">
-                    <button className="btn btn-success">
+                    <button
+                      className="btn btn-success"
+                      onClick={() =>
+                        navigate(`/menuitem/menuitemupsert/${menuItem.id}`)
+                      }
+                    >
                       <i className="bi bi-pencil-fill"></i>
                     </button>
                     <button className="btn btn-danger mx-2">
