@@ -9,6 +9,7 @@ import OrderConfirmed from './order/OrderConfirmed';
 import MyOrders from './order/MyOrders';
 import OrderList from '../components/page/order/OrderList';
 import OrderDetails from './order/OrderDetails';
+import AllOrders from './order/AllOrders';
 
 export {
   Home,
@@ -22,4 +23,5 @@ export {
   MyOrders,
   OrderList,
   OrderDetails,
+  AllOrders,
 };
