@@ -10,6 +10,7 @@ import MyOrders from './order/MyOrders';
 import OrderList from '../components/page/order/OrderList';
 import OrderDetails from './order/OrderDetails';
 import AllOrders from './order/AllOrders';
+import MenuItemList from './menuItem/MenuItemList';
 
 export {
   Home,
@@ -24,4 +25,5 @@ export {
   OrderList,
   OrderDetails,
   AllOrders,
+  MenuItemList,
 };

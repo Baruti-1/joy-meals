@@ -56,6 +56,13 @@ const Header = () => {
                 <ul className="dropdown-menu">
                   <li
                     className="dropdown-item"
+                    onClick={() => navigate('menuitem/menuitemlist')}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    Menu Item
+                  </li>
+                  <li
+                    className="dropdown-item"
                     onClick={() => navigate('/order/myorders')}
                     style={{ cursor: 'pointer' }}
                   >
