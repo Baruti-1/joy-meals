@@ -65,6 +65,7 @@ const App = () => {
             path="/menuitem/menuitemupsert/:id"
             element={<MenuItemUpsert />}
           />
+          <Route path="/menuitem/menuitemupsert" element={<MenuItemUpsert />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

@@ -14,7 +14,12 @@ const MenuItemList = () => {
         <div className="table p-5">
           <div className="d-flex align-items-center justify-content-between">
             <h1 className="text-success">MenuItem List</h1>
-            <button className="btn btn-success">Add New</button>
+            <button
+              className="btn btn-success"
+              onClick={() => navigate(`/menuitem/menuitemupsert`)}
+            >
+              Add New
+            </button>
           </div>
           <div className="p-2">
             <div className="row border">
