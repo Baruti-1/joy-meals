@@ -12,8 +12,6 @@ const OrderSummary = ({ data, userInput }) => {
   const badgeTypeColor = getStatusColor(data.status);
   const [updateOrderHeader] = useUpdateOrderHeaderMutation();
 
-  console.log(data.status);
-
   const nextStatus =
     data.status === 'confirmed'
       ? { color: 'info', value: 'Being Cooked' }

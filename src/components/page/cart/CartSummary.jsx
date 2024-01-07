@@ -4,6 +4,7 @@ import { useUpdateShoppingCartMutation } from '../../../apis/shoppingCartApi';
 import {
   updateQuantity,
   removeFromCart,
+  emptyCart,
 } from '../../../store/redux/shoppingCartSlice';
 
 const CartSummary = () => {
@@ -44,6 +45,8 @@ const CartSummary = () => {
           quantity: cartItem.quantity + updateQuantityBy,
         })
       );
+
+      // dispatch(emptyCart());
     }
   };
 

@@ -28,8 +28,6 @@ const MenuItemUpsert = () => {
   const [updateMenuItem] = useUpdateMenuItemMutation();
   const { data } = useGetMenuItemByIdQuery(id);
 
-  console.log(data);
-
   useEffect(() => {
     if (data && data.result) {
       const tempData = {
@@ -115,7 +113,6 @@ const MenuItemUpsert = () => {
     }
 
     if (response) {
-      console.log(response);
       setLoading(false);
       navigate('/menuitem/menuitemlist');
     }

@@ -109,7 +109,7 @@ const CartPickUpDetails = () => {
           type="submit"
           className="btn btn-lg btn-success form-control mt-3"
         >
-          {isLoading ? <MinLoader /> : 'Looks Good? Place Order!'}
+          {isLoading ? <MinLoader /> : 'Place Order!'}
         </button>
       </form>
     </div>

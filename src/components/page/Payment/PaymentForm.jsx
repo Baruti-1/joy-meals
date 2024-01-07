@@ -5,15 +5,26 @@ import {
   useElements,
   PaymentElement,
 } from '@stripe/react-stripe-js';
+import { useSelector, useDispatch } from 'react-redux';
 import { useCreateOrderMutation } from '../../../apis/orderApi';
 import toastNotify from '../../../helper/toastNotify';
+import { emptyCart } from '../../../store/redux/shoppingCartSlice';
 
 const PaymentForm = ({ data, userInput }) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const stripe = useStripe();
   const elements = useElements();
   const [createOrder] = useCreateOrderMutation();
+
+  const shoppingCartFromStore = useSelector(
+    (state) => state.shoppingCartStore.cartItems ?? []
+  );
+
+  const clearCart = () => {
+    dispatch(emptyCart());
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -72,6 +83,7 @@ const PaymentForm = ({ data, userInput }) => {
           result.paymentIntent.status === 'succeeded' ? 'confirmed' : 'pending',
       });
       if (response.data?.result.status === 'confirmed') {
+        clearCart();
         navigate(`/order/orderconfirmed/${response.data.result.orderHeaderId}`);
       }
     }
