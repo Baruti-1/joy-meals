@@ -93,7 +93,7 @@ const MenuItemUpsert = () => {
 
     formData.append('Name', menuItemInputs.name);
     formData.append('Description', menuItemInputs.escription);
-    formData.append('SpecialTag', menuItemInputs.specialTag);
+    formData.append('SpecialTag', menuItemInputs.specialTag ?? '');
     formData.append('Category', menuItemInputs.category);
     formData.append('Price', menuItemInputs.price);
     if (imageToDisplay) formData.append('File', imageToStore);
