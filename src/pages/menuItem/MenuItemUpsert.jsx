@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import inputHelper from '../../helper/inputHelper';
 import toastNotify from '../../helper/toastNotify';
+import {
+  useCreateMenuItemMutation,
+  useGetMenuItemByIdQuery,
+  useUpdateMenuItemMutation,
+} from '../../apis/menuItemApi';
+import { MainLoader } from '../../components/page/common';
 
 const menuItemData = {
   name: '',
@@ -12,13 +18,34 @@ const menuItemData = {
 };
 
 const MenuItemUpsert = () => {
+  const [loading, setLoading] = useState(false);
   const [menuItemInputs, setMenuItemInputs] = useState(menuItemData);
-  const [imageToBeStore, setImageToBeStore] = useState('');
-  const [imageToBeDisplay, setImageToBeDisplay] = useState(menuItemData);
+  const [imageToStore, setImageToStore] = useState('');
+  const [imageToDisplay, setImageToDisplay] = useState(menuItemData);
+  const navigate = useNavigate();
   const { id } = useParams();
+  const [createMenuItem] = useCreateMenuItemMutation();
+  const [updateMenuItem] = useUpdateMenuItemMutation();
+  const { data } = useGetMenuItemByIdQuery(id);
+
+  console.log(data);
+
+  useEffect(() => {
+    if (data && data.result) {
+      const tempData = {
+        name: data.result.name,
+        description: data.result.description,
+        specialTag: data.result.specialTag,
+        category: data.result.category,
+        price: data.result.price,
+      };
+      setMenuItemInputs(tempData);
+      setImageToDisplay(data.result.image);
+    }
+  }, [data]);
 
   const handleMenuItemInput = (e) => {
-    const tempData = inputHelper(e, menuItemData);
+    const tempData = inputHelper(e, menuItemInputs);
     setMenuItemInputs(tempData);
   };
 
@@ -33,34 +60,77 @@ const MenuItemUpsert = () => {
       });
 
       if (file.size > 1000 * 1024) {
-        setImageToBeStore('');
-        toastNotify('File must be less than 1MB', 'error');
+        setImageToStore('');
+        toastNotify('File must  less than 1MB', 'error');
         return;
       } else if (isImageTypeValid.length === 0) {
-        setImageToBeStore('');
-        toastNotify('File must be in jpeg, jpg, or png', 'error');
+        setImageToStore('');
+        toastNotify('File must  in jpeg, jpg, or png', 'error');
         return;
       }
 
       const reader = new FileReader();
       reader.readAsDataURL(file);
-      setImageToBeStore(file);
+      setImageToStore(file);
       reader.onload = (e) => {
         //console.log(e);
         const imgUrl = String(e.target?.result);
-        setImageToBeDisplay(imgUrl);
+        setImageToDisplay(imgUrl);
       };
     }
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    if (!imageToStore && !id) {
+      toastNotify('Please upload an image', 'error');
+      setLoading(false);
+      return;
+    }
+
+    const formData = new FormData();
+
+    formData.append('Name', menuItemInputs.name);
+    formData.append('Description', menuItemInputs.escription);
+    formData.append('SpecialTag', menuItemInputs.specialTag);
+    formData.append('Category', menuItemInputs.category);
+    formData.append('Price', menuItemInputs.price);
+    if (imageToDisplay) formData.append('File', imageToStore);
+
+    let response;
+
+    if (id) {
+      // update
+      formData.append('Id', id);
+      response = updateMenuItem({
+        data: formData,
+        id,
+      });
+      toastNotify('Menu Item updated', 'success');
+    } else {
+      // create
+      response = await createMenuItem(formData);
+      toastNotify('Menu Item created', 'success');
+    }
+
+    if (response) {
+      console.log(response);
+      setLoading(false);
+      navigate('/menuitem/menuitemlist');
+    }
+    setLoading(false);
+  };
+
   return (
-    <div className="container border mt-5 p-5">
+    <div className="container border mt-5 p-5 bg-light">
+      {loading && <MainLoader />}
       <h3 className="offset-2 px-2 text-success">
-        {id ? 'Update Product' : 'Add Product'}
+        {id ? 'Update Menu Item' : 'Add Menu Item'}
       </h3>
-      <form method="post" encType="multipart/form-data">
+      <form method="post" encType="multipart/form-data" onSubmit={handleSubmit}>
         <div className="row mt-3">
-          <div className="col-md-5 offset-2">
+          <div className="col-md-7">
             <input
               type="text"
               className="form-control"
@@ -73,7 +143,7 @@ const MenuItemUpsert = () => {
             <textarea
               className="form-control mt-3"
               placeholder="Enter Description"
-              row={40}
+              row={25}
               name="description"
               value={menuItemInputs.description}
               onChange={handleMenuItemInput}
@@ -114,13 +184,13 @@ const MenuItemUpsert = () => {
                 style={{ width: '50%' }}
                 className="btn btn-success mt-5"
               >
-                Submit
+                {id ? 'Update' : 'Create'}
               </button>
             </div>
           </div>
           <div className="col-md-5 text-center">
             <img
-              src={imageToBeDisplay}
+              src={imageToDisplay}
               style={{ width: '100%', borderRadius: '30px' }}
               alt=""
             />
