@@ -78,18 +78,22 @@ const Header = () => {
                 </ul>
               </li>
             ) : (
+              userData.id && (
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/order/myorders">
+                    My Orders
+                  </NavLink>
+                </li>
+              )
+            )}
+            {userData.id && (
               <li className="nav-item">
-                <NavLink className="nav-link" to="/order/myorders">
-                  My Orders
+                <NavLink className="nav-link" to="/shoppingCart">
+                  <i className="bi bi-cart"></i>{' '}
+                  {userData.id && `(${shoppingCartFromStore.length})`}
                 </NavLink>
               </li>
             )}
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/shoppingCart">
-                <i className="bi bi-cart"></i>{' '}
-                {userData.id && `(${shoppingCartFromStore.length})`}
-              </NavLink>
-            </li>
             <div className="d-flex" style={{ marginLeft: 'auto' }}>
               {userData.id && (
                 <>
